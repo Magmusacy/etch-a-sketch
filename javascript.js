@@ -2,11 +2,16 @@ const container = document.querySelector('#container');
 const btn = document.querySelector('#reset')
 let x = 0;
 function grid(x) {
-    container.style.cssText = `grid-template-columns:repeat(${x}, 1fr)` 
+    
+    const height = 640/x-7
+    const width = 640/x-7
+
+    container.style.cssText = `grid-template-columns:repeat(${x}, 1fr)`
 
 for (let i = 0; i < x**2; i++) {
     const rows = document.createElement('div');
     rows.classList.add('rows')
+    rows.setAttribute(`style`, `width:${width}px; height:${height}px;`)
     container.appendChild(rows);
     rows.addEventListener('mouseover', (e) => {
         e.target.classList.add('mouseover')
