@@ -23,15 +23,13 @@ for (let i = 0; i < x**2; i++) {
 }
 
 function blackToWhite(color) {
-    let newR, newG, newB;
-    
-    const [r, g, b] = color.slice(4, -1).split(', ');
-    
-    newR = r - (Math.round((255 / 100) * 10));
-    newG = g - (Math.round((255 / 100) * 10));
-    newB = b - (Math.round((255 / 100) * 10));
-    
-    return `rgb(${newR}, ${newG}, ${newB})`
+    er = document.querySelector('div')
+    er.addEventListener('mouseover', (e) => {
+    e.target.style.opacity = parseFloat(e.target.style.opacity) - 0.1;
+    container.style.backgroundColor = 'white'
+    container.style.opacity = '1'
+    console.log(e.target)
+    })
 }
 
 function rainbowColor() {
@@ -58,10 +56,4 @@ function reset() {
 grid(16)
 reset()
 
-er = document.querySelector('div')
-er.addEventListener('mouseover', (e) => {
-e.target.style.opacity = parseFloat(e.target.style.opacity) - 0.1;
-container.style.backgroundColor = 'white'
-container.style.opacity = '1'
-console.log(e.target)
-})
+
