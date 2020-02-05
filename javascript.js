@@ -5,29 +5,39 @@ let color = 0;
 let r = 0;
 let g = 0;
 let b = 0;
-const er = document.querySelector('div')
+
 function grid(x) {
     
-    const height = 640/x-7
-    const width = 640/x-7
+    const height = 640/x-6
+    const width = 640/x-6
 
     container.style.cssText = `grid-template-columns:repeat(${x}, 1fr)`
 
 for (let i = 0; i < x**2; i++) {
     const rows = document.createElement('div');
     rows.classList.add('rows')
-    rows.setAttribute(`style`, `width:${width}px; height:${height}px;`)
+    rows.setAttribute(`style`, `width:${width}px; height:${height}px; opacity:1;`)
     container.appendChild(rows);
-    rows.addEventListener('mouseover', (e) => {
-        changeColor()
-        e.target.style.backgroundColor = `rgb(${r},${g},${b})`       
-        })
+    
 }
 }
-function changeColor() {
-    r = Math.floor(Math.random()*255+1);
+
+function blackToWhite(color) {
+    let newR, newG, newB;
+    
+    const [r, g, b] = color.slice(4, -1).split(', ');
+    
+    newR = r - (Math.round((255 / 100) * 10));
+    newG = g - (Math.round((255 / 100) * 10));
+    newB = b - (Math.round((255 / 100) * 10));
+    
+    return `rgb(${newR}, ${newG}, ${newB})`
+}
+
+function rainbowColor() {
+  /*  r = Math.floor(Math.random()*255+1);
     g = Math.floor(Math.random()*255+1);
-    b = Math.floor(Math.random()*255+1)
+    b = Math.floor(Math.random()*255+1)*/
 }
 function reset() {
     const btn = document.querySelector('#reset')
@@ -47,3 +57,11 @@ function reset() {
 
 grid(16)
 reset()
+
+er = document.querySelector('div')
+er.addEventListener('mouseover', (e) => {
+e.target.style.opacity = parseFloat(e.target.style.opacity) - 0.1;
+container.style.backgroundColor = 'white'
+container.style.opacity = '1'
+console.log(e.target)
+})
