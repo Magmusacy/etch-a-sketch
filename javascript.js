@@ -1,15 +1,20 @@
 const container = document.querySelector('#container');
-const btn = document.querySelector('#reset')
+const reset = document.querySelector('#reset')
 let x = 0;
-let color = 0;
-let r = 0;
-let g = 0;
-let b = 0;
-
+const rainbow = document.querySelector('#rainbow')
+rainbow.addEventListener('click', () => {
+    rainbowColor(1);
+    blackToWhite(0)
+})
+const blcktowhit = document.querySelector('#blck_to_whit')
+blcktowhit.addEventListener('click', () => {
+    blackToWhite(1);
+    rainbowColor(0)
+})
 function grid(x) {
     
-    const height = 640/x-6
-    const width = 640/x-6
+    const height = 640/x
+    const width = 640/x
 
     container.style.cssText = `grid-template-columns:repeat(${x}, 1fr)`
 
@@ -22,24 +27,35 @@ for (let i = 0; i < x**2; i++) {
 }
 }
 
-function blackToWhite(color) {
-    er = document.querySelector('div')
-    er.addEventListener('mouseover', (e) => {
+function blackToWhite(o) {
+    if(o === 1) {
+    color1 = document.querySelector('div')
+    color1.addEventListener('mouseover', (e) => {
     e.target.style.opacity = parseFloat(e.target.style.opacity) - 0.1;
-    container.style.backgroundColor = 'white'
-    container.style.opacity = '1'
-    console.log(e.target)
+    container.style.backgroundColor = 'white';
+    container.style.opacity = '1';
     })
+    }
+    else color1 = undefined
 }
 
-function rainbowColor() {
-  /*  r = Math.floor(Math.random()*255+1);
-    g = Math.floor(Math.random()*255+1);
-    b = Math.floor(Math.random()*255+1)*/
+function rainbowColor(o) {
+    if(o === 1) {
+    color2 = document.querySelector('div')
+    color2.addEventListener('mouseover', (e) => {
+    r = Math.floor(Math.random()*256);
+    g = Math.floor(Math.random()*256);
+    b = Math.floor(Math.random()*256);
+    e.target.style.backgroundColor = `rgb(${r},${g},${b})`
+    container.style.backgroundColor = 'white';
+    container.style.opacity = '1';
+    })
 }
-function reset() {
-    const btn = document.querySelector('#reset')
-    btn.addEventListener('click', () => {
+    else console.log('chuj')
+
+}
+function resetFunc() {
+    reset.addEventListener('click', () => {
     x = prompt('How many squares per side do u want?','16')
     if (isNaN(x)) {
         alert('Choose a number') 
@@ -52,8 +68,5 @@ function reset() {
     })
 }
 
-
 grid(16)
-reset()
-
-
+resetFunc()
