@@ -2,17 +2,26 @@ const container = document.querySelector('#container');
 const reset = document.querySelector('#reset')
 let x = 0;
 const rainbow = document.querySelector('#rainbow')
-rainbow.addEventListener('click', () => {
-    rainbowColor(1);
-    blackToWhite(0)
+rainbow.addEventListener('change', () => {
+    console.log(rainbow)
+    if (rainbow.checked) {
+        rainbowColor(1)
+    } else {
+        rainbowColor(0)
+    }
+
 })
 const blcktowhit = document.querySelector('#blck_to_whit')
-blcktowhit.addEventListener('click', () => {
-    blackToWhite(1);
-    rainbowColor(0)
+blcktowhit.addEventListener('change', () => {
+    if (blcktowhit.checked) {
+        blackToWhite(1)
+    } else {
+        blackToWhite(0)
+    }
 })
 function grid(x) {
     
+
     const height = 640/x
     const width = 640/x
 
@@ -27,6 +36,7 @@ for (let i = 0; i < x**2; i++) {
 }
 }
 
+
 function blackToWhite(o) {
     if(o === 1) {
     color1 = document.querySelector('div')
@@ -36,8 +46,15 @@ function blackToWhite(o) {
     container.style.opacity = '1';
     })
     }
-    else color1 = undefined
+    else {
+    color1.addEventListener('mouseover', (e) => {
+        e.target.style.opacity = parseFloat(e.target.style.opacity) + 0.1;
+        container.style.backgroundColor = 'white';
+        container.style.opacity = '1';    
+    })
 }
+}
+
 
 function rainbowColor(o) {
     if(o === 1) {
@@ -50,8 +67,13 @@ function rainbowColor(o) {
     container.style.backgroundColor = 'white';
     container.style.opacity = '1';
     })
+} else {
+    color2.addEventListener('mouseover', (e) => {
+        e.target.style.backgroundColor = 'rgb(0,0,0)'
+        container.style.backgroundColor = 'white';
+        container.style.opacity = '1';
+    })
 }
-    else console.log('chuj')
 
 }
 function resetFunc() {
